@@ -1,12 +1,11 @@
 <?php
 
   require 'config.php';
-  require 'lib/functions.php';
 
   header("Content-Type: text/html");
   include 'lib/AltoRouter.php'; //path to AltoRoute script
   $router = new AltoRouter();
-  $router -> setBasePath($siteBasePath); // Setup the URL routing. This is production ready.
+  $router -> setBasePath(''); // Setup the URL routing. This is production ready.
 
   // Routing examples
   // $router->map('GET','/', 'pages/home-page.php', 'home');
@@ -24,11 +23,6 @@
   foreach ($pages_map as $pageKey => $pageValue) {
     $router -> map( $pageValue['page_method'], $pageValue['page_url'], $pageValue['page_source'], $pageKey);
   }
-
-  // Test if not duplicated unique values in $pages_map, works on localhost only
-  if ($devToolsActive) localTestDuplicates($pages_map);
-
-
 
 
   /* Match the current request */
